@@ -201,7 +201,7 @@ EE(:,:,2) = EEpart2;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%% Add more pseudo points for clustering %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-N2 = 5000;
+N2 = 10000;
 p_x = linspace(0, 1, N2)';
 
 p_tmp = p_x * linspace(1, n_basis, n_basis);
@@ -237,7 +237,7 @@ Z = linkage(this_dat,'ward');
 
 rng(1);
 lower = 10; %floor(N2 * 0.5/100);
-upper = 200; %floor(N2 * 2/100);
+upper = 250; %floor(N2 * 2/100);
 cnt2 = zeros(upper - lower, 1);
 cnt3 = zeros(upper - lower, 1);
 parfor j= 1: (upper - lower+1)
@@ -275,7 +275,8 @@ best = 1+ max(find(cnt3_rel_dif > 1e-2));
 rng(123);
 ttt = randi([1, 10000]);
 
-[cl, ~, sumd, ~] = kmeans([p_Y1(:,ttt)  p_Y2(:,ttt)], best + lower - 1);
+%[cl, ~, sumd, ~] = kmeans([p_Y1(:,ttt)  p_Y2(:,ttt)], best + lower - 1);
+cl = cluster(Z,'Maxclust',best + lower - 1);
 yhat = zeros(N2, 2);
 for j = 1:max(cl)
     jj = find(cl == j);

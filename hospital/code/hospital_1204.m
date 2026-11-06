@@ -46,12 +46,13 @@ pXX = [pXX; pXX + 0.05* randn(size(pXX))];
 pXX = [pXX; pXX + 0.05* randn(size(pXX))];
 
 dists = pdist2(pXX, knots);
-DD = pdist2(pXX, pXX);
+%DD = pdist2(pXX, pXX);
 co = 0.2; %15 * min(DD + 100 *eye(N), [], "all");
 pTheta1 = exp( - abs(dists)/ co );
 
 %%%%%%%%%%%%%%%%% UKLE %%%%%%%%%%%%%%%%%%
 
+Theta1 = pdist2(XX, knots);
 MM = size(Theta1,2);
 
 
@@ -188,8 +189,8 @@ cnt3_dif = -cnt3(2:end) + cnt3(1:end-1);
 
 
 cnt3_rel_dif = cnt3_dif./cnt3(2:end);
-%subplot(1,2,1); plot(lower: (upper-1), cnt3_dif);
-%subplot(1,2,2); plot(lower: (upper-1), cnt3_rel_dif );
+subplot(1,2,1); plot(lower: (upper-1), cnt3_dif);
+subplot(1,2,2); plot(lower: (upper-1), cnt3_rel_dif );
 
 
 
